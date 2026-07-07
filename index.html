@@ -2,76 +2,73 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>AlphaTraerAI V2.0｜朱老師 AI 投資中心</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaTraerAI V2.2｜朱老師 AI 投資中心</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
+  <header class="hero">
     <div>
-      <p class="eyebrow">AlphaTraerAI V2.0</p>
+      <div class="version">AlphaTraerAI V2.2</div>
       <h1>朱老師 AI 投資中心</h1>
-      <p class="subtitle">台股觀察、技術分析、AI 訊號與交易紀錄的一頁式流程。</p>
+      <p>可操作版：自選股切換、持股紀錄、損益試算與本機儲存。</p>
     </div>
     <button id="themeBtn">切換深色</button>
   </header>
 
   <main class="layout">
-    <aside class="panel watchlist">
+    <section class="card">
       <h2>自選股</h2>
-      <div id="stockList"></div>
-      <p class="note">示範資料僅供學習，不構成投資建議。</p>
-    </aside>
-
-    <section class="content">
-      <div class="hero panel">
-        <div>
-          <p class="tag">目前標的</p>
-          <h2 id="stockName">0050 元大台灣50</h2>
-          <p id="stockMeta">ETF｜大型權值股</p>
-        </div>
-        <div class="signal" id="aiSignal">觀望</div>
+      <div class="watchlist" id="watchlist"></div>
+      <div class="add-row">
+        <input id="symbolInput" placeholder="代號 例：2454" />
+        <input id="nameInput" placeholder="名稱 例：聯發科" />
+        <button id="addStockBtn">新增</button>
       </div>
+      <p class="note">示範資料僅供學習，不構成投資建議。</p>
+    </section>
 
-      <section class="cards">
-        <article class="metric panel"><span>現價</span><strong id="price">--</strong></article>
-        <article class="metric panel"><span>漲跌</span><strong id="change">--</strong></article>
-        <article class="metric panel"><span>RSI</span><strong id="rsi">--</strong></article>
-        <article class="metric panel"><span>勝率評估</span><strong id="prob">--</strong></article>
-      </section>
+    <section class="card focus">
+      <div class="label">目前標的</div>
+      <h2 id="stockTitle">0050 元大台灣50</h2>
+      <p id="stockType">ETF｜大型權值股</p>
+      <div class="signal" id="signal">買進觀察</div>
+    </section>
 
-      <section class="panel">
-        <div class="sectionHead">
-          <h2>技術分析流程</h2>
-          <button id="runBtn">重新分析</button>
-        </div>
-        <div class="chart" id="chart"></div>
-        <div class="steps" id="steps"></div>
-      </section>
+    <section class="grid cards4">
+      <div class="card stat"><span>現價</span><b id="price">188.4</b></div>
+      <div class="card stat"><span>漲跌</span><b id="change">+0.8%</b></div>
+      <div class="card stat"><span>RSI</span><b id="rsi">58</b></div>
+      <div class="card stat"><span>勝率評估</span><b id="score">61%</b></div>
+    </section>
 
-      <section class="grid2">
-        <article class="panel">
-          <h2>AI 操作建議</h2>
-          <p id="advice" class="advice">請選擇標的。</p>
-          <ul class="rules">
-            <li>上漲機率 ≥ 55%：可列入觀察建倉</li>
-            <li>跌破風控線：減碼或停損</li>
-            <li>盤勢不明：保留現金，不追高</li>
-          </ul>
-        </article>
-        <article class="panel">
-          <h2>交易紀錄</h2>
-          <form id="tradeForm">
-            <input id="tradeText" placeholder="例：0050 觀察，等待突破月線" />
-            <button>新增</button>
-          </form>
-          <ul id="tradeLog" class="log"></ul>
-        </article>
-      </section>
+    <section class="card">
+      <div class="section-head">
+        <h2>技術分析流程</h2>
+        <button id="reanalyzeBtn">重新分析</button>
+      </div>
+      <ol id="analysisList" class="steps"></ol>
+    </section>
+
+    <section class="card">
+      <h2>我的持股試算</h2>
+      <div class="trade-form">
+        <input id="buyPrice" type="number" step="0.1" placeholder="買進價格" />
+        <input id="shares" type="number" step="1" placeholder="股數" />
+        <button id="saveHoldingBtn">儲存持股</button>
+      </div>
+      <div id="holdingResult" class="result">尚未輸入持股。</div>
+    </section>
+
+    <section class="card">
+      <h2>交易日誌</h2>
+      <textarea id="journal" placeholder="記錄今日觀察、買賣理由、風險提醒……"></textarea>
+      <button id="saveJournalBtn">儲存日誌</button>
+      <p class="note">資料會儲存在本機瀏覽器，下次開啟仍可保留。</p>
     </section>
   </main>
 
-  <footer>© 2026 朱老師 AI 投資中心｜AlphaTraerAI V2.0</footer>
+  <footer>AlphaTraerAI V2.2｜教學示範系統｜請自行判斷投資風險</footer>
   <script src="script.js"></script>
 </body>
 </html>
