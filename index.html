@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AlphaTraerAI V3.0｜朱老師 AI 投資中心</title>
+  <title>AlphaTraerAI V3.1｜朱老師 AI 投資中心</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="hero">
     <div>
-      <div class="version">AlphaTraerAI V3.0</div>
+      <div class="version">AlphaTraerAI V3.1</div>
       <h1>朱老師 AI 投資中心</h1>
-      <p>台股分析・AI 評分・持股損益・交易紀錄・iPad 版</p>
+      <p>台股分析・K 線圖・AI 評分・持股損益・交易紀錄</p>
     </div>
     <button id="themeBtn">切換深色</button>
   </header>
@@ -19,9 +19,10 @@
   <main class="grid">
     <section class="card market">
       <h2>今日大盤</h2>
-      <div class="big">加權指數 23,880.36</div>
-      <div class="up">▲ 168.52（+0.71%）</div>
-      <small>示範資料｜可後續串接即時行情 API</small>
+      <div class="big">加權指數 <span id="marketIndex">23,880.36</span></div>
+      <div class="up" id="marketChange">▲ 168.52（+0.71%）</div>
+      <button id="refreshBtn">更新示範行情</button>
+      <small>V3.1 為本機示範行情；V3.2 可再串接真實資料源。</small>
     </section>
 
     <section class="card">
@@ -32,13 +33,14 @@
         <input id="stockName" placeholder="名稱 例：聯發科" />
         <button id="addBtn">新增</button>
       </div>
+      <small>點股票可切換分析；按「刪」可移除。</small>
     </section>
 
     <section class="card analysis">
       <h2>AI 分析</h2>
-      <div id="selectedStock" class="selected-title">請選擇股票</div>
-      <div class="score">★★★★☆</div>
-      <div id="aiText" class="ai-text">點選左側自選股後，系統會顯示 AI 評分與操作建議。</div>
+      <div id="selectedStock" class="selected-title">0050 元大台灣50</div>
+      <div class="score" id="score">★★★★☆</div>
+      <div id="aiText" class="ai-text"></div>
       <div class="signal" id="signal">觀望</div>
     </section>
 
@@ -46,7 +48,7 @@
       <h2>K 線趨勢圖</h2>
       <canvas id="chart" width="900" height="360"></canvas>
       <div class="indicators">
-        <span>RSI：62</span><span>KD：黃金交叉</span><span>MACD：翻紅</span><span>MA20：向上</span>
+        <span id="rsi">RSI：62</span><span id="kd">KD：黃金交叉</span><span id="macd">MACD：翻紅</span><span id="ma">MA20：向上</span>
       </div>
     </section>
 
@@ -76,7 +78,7 @@
     </section>
   </main>
 
-  <footer>AlphaTraerAI V3.0｜僅供學習與試算，不構成投資建議。</footer>
+  <footer>AlphaTraerAI V3.1｜僅供學習與試算，不構成投資建議。</footer>
   <script src="script.js"></script>
 </body>
 </html>
