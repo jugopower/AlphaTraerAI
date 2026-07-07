@@ -3,72 +3,80 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AlphaTraerAI V2.2｜朱老師 AI 投資中心</title>
+  <title>AlphaTraerAI V3.0｜朱老師 AI 投資中心</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header class="hero">
     <div>
-      <div class="version">AlphaTraerAI V2.2</div>
+      <div class="version">AlphaTraerAI V3.0</div>
       <h1>朱老師 AI 投資中心</h1>
-      <p>可操作版：自選股切換、持股紀錄、損益試算與本機儲存。</p>
+      <p>台股分析・AI 評分・持股損益・交易紀錄・iPad 版</p>
     </div>
     <button id="themeBtn">切換深色</button>
   </header>
 
-  <main class="layout">
+  <main class="grid">
+    <section class="card market">
+      <h2>今日大盤</h2>
+      <div class="big">加權指數 23,880.36</div>
+      <div class="up">▲ 168.52（+0.71%）</div>
+      <small>示範資料｜可後續串接即時行情 API</small>
+    </section>
+
     <section class="card">
       <h2>自選股</h2>
-      <div class="watchlist" id="watchlist"></div>
-      <div class="add-row">
-        <input id="symbolInput" placeholder="代號 例：2454" />
-        <input id="nameInput" placeholder="名稱 例：聯發科" />
-        <button id="addStockBtn">新增</button>
+      <div id="watchList"></div>
+      <div class="row">
+        <input id="stockCode" placeholder="代號 例：2454" />
+        <input id="stockName" placeholder="名稱 例：聯發科" />
+        <button id="addBtn">新增</button>
       </div>
-      <p class="note">示範資料僅供學習，不構成投資建議。</p>
     </section>
 
-    <section class="card focus">
-      <div class="label">目前標的</div>
-      <h2 id="stockTitle">0050 元大台灣50</h2>
-      <p id="stockType">ETF｜大型權值股</p>
-      <div class="signal" id="signal">買進觀察</div>
+    <section class="card analysis">
+      <h2>AI 分析</h2>
+      <div id="selectedStock" class="selected-title">請選擇股票</div>
+      <div class="score">★★★★☆</div>
+      <div id="aiText" class="ai-text">點選左側自選股後，系統會顯示 AI 評分與操作建議。</div>
+      <div class="signal" id="signal">觀望</div>
     </section>
 
-    <section class="grid cards4">
-      <div class="card stat"><span>現價</span><b id="price">188.4</b></div>
-      <div class="card stat"><span>漲跌</span><b id="change">+0.8%</b></div>
-      <div class="card stat"><span>RSI</span><b id="rsi">58</b></div>
-      <div class="card stat"><span>勝率評估</span><b id="score">61%</b></div>
+    <section class="card chart-card">
+      <h2>K 線趨勢圖</h2>
+      <canvas id="chart" width="900" height="360"></canvas>
+      <div class="indicators">
+        <span>RSI：62</span><span>KD：黃金交叉</span><span>MACD：翻紅</span><span>MA20：向上</span>
+      </div>
     </section>
 
     <section class="card">
-      <div class="section-head">
-        <h2>技術分析流程</h2>
-        <button id="reanalyzeBtn">重新分析</button>
+      <h2>持股損益試算</h2>
+      <div class="row wrap">
+        <input id="holdCode" placeholder="股票代號" />
+        <input id="cost" type="number" placeholder="買進成本" />
+        <input id="shares" type="number" placeholder="股數" />
+        <input id="price" type="number" placeholder="現價" />
+        <button id="calcBtn">計算</button>
       </div>
-      <ol id="analysisList" class="steps"></ol>
+      <div id="profitResult" class="result">輸入成本、股數、現價後可試算損益。</div>
     </section>
 
     <section class="card">
-      <h2>我的持股試算</h2>
-      <div class="trade-form">
-        <input id="buyPrice" type="number" step="0.1" placeholder="買進價格" />
-        <input id="shares" type="number" step="1" placeholder="股數" />
-        <button id="saveHoldingBtn">儲存持股</button>
+      <h2>交易紀錄</h2>
+      <div class="row wrap">
+        <input id="tradeDate" type="date" />
+        <input id="tradeCode" placeholder="代號" />
+        <select id="tradeType"><option>買進</option><option>賣出</option></select>
+        <input id="tradePrice" type="number" placeholder="成交價" />
+        <input id="tradeShares" type="number" placeholder="股數" />
+        <button id="tradeBtn">加入紀錄</button>
       </div>
-      <div id="holdingResult" class="result">尚未輸入持股。</div>
-    </section>
-
-    <section class="card">
-      <h2>交易日誌</h2>
-      <textarea id="journal" placeholder="記錄今日觀察、買賣理由、風險提醒……"></textarea>
-      <button id="saveJournalBtn">儲存日誌</button>
-      <p class="note">資料會儲存在本機瀏覽器，下次開啟仍可保留。</p>
+      <table><thead><tr><th>日期</th><th>股票</th><th>動作</th><th>價格</th><th>股數</th></tr></thead><tbody id="tradeBody"></tbody></table>
     </section>
   </main>
 
-  <footer>AlphaTraerAI V2.2｜教學示範系統｜請自行判斷投資風險</footer>
+  <footer>AlphaTraerAI V3.0｜僅供學習與試算，不構成投資建議。</footer>
   <script src="script.js"></script>
 </body>
 </html>
