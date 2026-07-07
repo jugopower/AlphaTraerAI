@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaTraerAI V1.0｜朱老師 AI 投資中心</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="badge">AlphaTraerAI V1.0</div>
+    <h1>朱老師 AI 投資中心</h1>
+    <p>台股分析系統｜0050 示範策略｜AI 訊號儀表板</p>
+    <div class="hero-actions">
+      <a href="#dashboard" class="btn primary">開始分析</a>
+      <a href="#guide" class="btn">操作說明</a>
+    </div>
+  </header>
+
+  <main>
+    <section id="dashboard" class="grid">
+      <article class="card big">
+        <h2>今日 AI 訊號</h2>
+        <div class="signal hold">觀望 / 等待突破</div>
+        <p>範例規則：預測上漲機率 ≥ 0.55 才建倉，單檔最高 95% 資金投入。</p>
+      </article>
+      <article class="card">
+        <h3>標的</h3>
+        <strong>0050.TW</strong>
+        <p>元大台灣50 ETF</p>
+      </article>
+      <article class="card">
+        <h3>停損</h3>
+        <strong>7%</strong>
+        <p>跌破風控線減碼或出場</p>
+      </article>
+      <article class="card">
+        <h3>倉位</h3>
+        <strong>95%</strong>
+        <p>單一標的示範，max_positions: 1</p>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>AI 分析表</h2>
+      <table>
+        <thead>
+          <tr><th>股票</th><th>上漲機率</th><th>趨勢</th><th>建議</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>0050</td><td>0.53</td><td>盤整</td><td>觀望</td></tr>
+          <tr><td>0056</td><td>0.50</td><td>偏弱</td><td>等待</td></tr>
+          <tr><td>2330 台積電</td><td>0.56</td><td>偏多</td><td>小量觀察</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel two">
+      <div>
+        <h2>資金試算</h2>
+        <label>本金（元）<input id="capital" type="number" value="100000"></label>
+        <label>投入比例（%）<input id="ratio" type="number" value="95"></label>
+        <button onclick="calc()">計算</button>
+        <p id="result">投入金額：約 95,000 元</p>
+      </div>
+      <div id="guide">
+        <h2>操作流程</h2>
+        <ol>
+          <li>每天輸入或查看股票資料。</li>
+          <li>確認 AI 上漲機率是否 ≥ 0.55。</li>
+          <li>符合條件才建倉。</li>
+          <li>跌破停損線立即控管風險。</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="warning">
+      <strong>風險提醒：</strong>本網站為教學與策略展示，不構成投資建議。投資有風險，請自行判斷。
+    </section>
+  </main>
+
+  <footer>© 2026 朱老師 AI 投資中心｜AlphaTraerAI V1.0</footer>
+  <script src="script.js"></script>
+</body>
+</html>
