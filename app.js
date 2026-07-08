@@ -1,0 +1,15 @@
+const prices={"0050":198.5,"0056":37.8,"006208":116.2,"2330":1035,"2317":214,"2454":1410};
+let watchlist=JSON.parse(localStorage.getItem('watchlistV4'))||[
+ {code:'0050',name:'元大台灣50'},{code:'0056',name:'高股息'},{code:'006208',name:'富邦台50'},{code:'2330',name:'台積電'},{code:'2317',name:'鴻海'}
+];
+let holdings=JSON.parse(localStorage.getItem('holdingsV4'))||[];
+let active=watchlist[0]?.code||'0050';
+function money(n){return 'NT$ '+Math.round(n).toLocaleString('zh-TW')}
+function save(){localStorage.setItem('watchlistV4',JSON.stringify(watchlist));localStorage.setItem('holdingsV4',JSON.stringify(holdings));}
+function renderWatchlist(){const el=document.getElementById('watchlist');el.innerHTML='';watchlist.forEach(s=>{const p=prices[s.code]||100;const div=document.createElement('div');div.className='stock '+(s.code===active?'active':'');div.onclick=()=>{active=s.code;renderWatchlist()};div.innerHTML=`<div><b>${s.code}</b><span>${s.name}</span></div><div class="price">${p}<button class="remove" data-code="${s.code}">刪除</button></div>`;el.appendChild(div);});document.querySelectorAll('.remove').forEach(btn=>btn.onclick=e=>{e.stopPropagation();watchlist=watchlist.filter(x=>x.code!==btn.dataset.code);save();renderWatchlist();});}
+function renderHoldings(){const tbody=document.getElementById('holdingTable');tbody.innerHTML='';let value=0,cost=0;holdings.forEach(h=>{const p=prices[h.code]||h.cost;const v=p*h.shares;const c=h.cost*h.shares;value+=v;cost+=c;const profit=v-c;const tr=document.createElement('tr');tr.innerHTML=`<td>${h.code}</td><td>${h.shares}</td><td>${h.cost}</td><td>${p}</td><td class="${profit>=0?'up':'down'}">${money(profit)}</td>`;tbody.appendChild(tr);});const profit=value-cost;document.getElementById('totalValue').textContent=money(value);document.getElementById('totalProfit').textContent=money(profit);document.getElementById('totalProfit').className=profit>=0?'up':'down';document.getElementById('totalReturn').textContent=cost?((profit/cost)*100).toFixed(2)+'%':'0%';document.getElementById('totalReturn').className=profit>=0?'up':'down';}
+document.getElementById('addStockBtn').onclick=()=>{const code=document.getElementById('stockCode').value.trim();const name=document.getElementById('stockName').value.trim()||'自選股';if(!code)return;watchlist.push({code,name});document.getElementById('stockCode').value='';document.getElementById('stockName').value='';save();renderWatchlist();};
+document.getElementById('addHoldingBtn').onclick=()=>{const code=document.getElementById('holdCode').value.trim();const shares=Number(document.getElementById('holdShares').value);const cost=Number(document.getElementById('holdCost').value);if(!code||!shares||!cost)return;holdings.push({code,shares,cost});['holdCode','holdShares','holdCost'].forEach(id=>document.getElementById(id).value='');save();renderHoldings();};
+document.getElementById('themeBtn').onclick=()=>{document.body.classList.toggle('dark');localStorage.setItem('themeV4',document.body.classList.contains('dark')?'dark':'light');};
+if(localStorage.getItem('themeV4')==='dark')document.body.classList.add('dark');
+renderWatchlist();renderHoldings();

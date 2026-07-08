@@ -2,86 +2,81 @@
 <html lang="zh-Hant">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <title>AlphaTraerAI V3.5｜朱老師 AI 投資中心</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AlphaTraerAI Pro V4.0 Alpha</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <main class="app">
-    <header class="hero">
-      <div class="version">AlphaTraerAI V3.5</div>
+  <header class="topbar">
+    <div>
+      <div class="version">AlphaTraerAI Pro V4.0 Alpha</div>
       <h1>朱老師 AI 投資中心</h1>
-      <p>台股分析・AI 評分・K 線圖・持股損益・交易紀錄・iPad 專業版</p>
-      <button id="themeBtn">切換深色</button>
-    </header>
+      <p>Dashboard・即時行情・自選股・持股管理</p>
+    </div>
+    <button id="themeBtn">切換深色</button>
+  </header>
 
+  <main class="layout">
     <section class="card market-card">
-      <h2>今日大盤</h2>
+      <h2>📈 今日大盤</h2>
       <div class="market-grid">
         <div>
-          <div class="label">加權指數</div>
-          <div class="big">23,880.36</div>
-          <div class="up">▲ 168.52（+0.71%）</div>
+          <span>加權指數</span>
+          <strong>23,880.36</strong>
+          <em class="up">▲ 168.52（+0.71%）</em>
         </div>
         <div>
-          <div class="label">成交金額</div>
-          <div class="mid">3,128 億</div>
-          <div class="small">示範資料｜可接即時行情 API</div>
+          <span>櫃買指數</span>
+          <strong>245.18</strong>
+          <em class="up">▲ 1.42（+0.58%）</em>
         </div>
       </div>
+      <small>Alpha 版示範資料｜Beta 版將串接行情 API</small>
     </section>
 
-    <section class="card">
-      <h2>自選股</h2>
+    <section class="card watch-card">
+      <h2>⭐ 我的自選股</h2>
+      <div id="watchlist" class="watchlist"></div>
       <div class="add-row">
-        <input id="stockInput" inputmode="numeric" placeholder="輸入代號 例：2454" />
-        <input id="nameInput" placeholder="名稱 例：聯發科" />
+        <input id="stockCode" placeholder="代號 例：2454" />
+        <input id="stockName" placeholder="名稱 例：聯發科" />
         <button id="addStockBtn">新增</button>
       </div>
-      <div id="watchlist" class="watchlist"></div>
     </section>
 
-    <section class="card analysis-card">
-      <div class="section-head">
-        <h2>股票分析</h2>
-        <span id="selectedStock" class="pill">0050 元大台灣50</span>
+    <section class="card portfolio-card">
+      <h2>💼 持股管理</h2>
+      <div class="summary">
+        <div><span>總市值</span><strong id="totalValue">NT$ 0</strong></div>
+        <div><span>總損益</span><strong id="totalProfit">NT$ 0</strong></div>
+        <div><span>報酬率</span><strong id="totalReturn">0%</strong></div>
       </div>
-      <div class="stats-grid">
-        <div><span>現價</span><b id="priceNow">198.5</b></div>
-        <div><span>漲跌幅</span><b class="up" id="changeNow">+0.82%</b></div>
-        <div><span>AI 評分</span><b id="aiScore">82</b></div>
-        <div><span>建議</span><b id="aiAction">分批布局</b></div>
+      <div class="add-row portfolio-inputs">
+        <input id="holdCode" placeholder="股票代號" />
+        <input id="holdShares" type="number" placeholder="股數" />
+        <input id="holdCost" type="number" placeholder="成本價" />
+        <button id="addHoldingBtn">加入持股</button>
       </div>
-      <canvas id="kline" width="900" height="360" aria-label="K線圖"></canvas>
-      <div class="indicator-grid">
-        <div>RSI <b id="rsi">62</b></div>
-        <div>KD <b id="kd">黃金交叉</b></div>
-        <div>MACD <b id="macd">翻紅</b></div>
-        <div>風險 <b id="risk">中</b></div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>股票</th><th>股數</th><th>成本</th><th>現價</th><th>損益</th></tr></thead>
+          <tbody id="holdingTable"></tbody>
+        </table>
       </div>
     </section>
 
-    <section class="card">
-      <h2>持股損益試算</h2>
-      <div class="calc-grid">
-        <input id="costInput" type="number" placeholder="買進成本" />
-        <input id="sharesInput" type="number" placeholder="股數" />
-        <button id="calcBtn">計算損益</button>
-      </div>
-      <div id="profitResult" class="result">輸入成本與股數後，可自動計算損益。</div>
-    </section>
-
-    <section class="card">
-      <h2>交易紀錄</h2>
-      <div class="trade-grid">
-        <select id="tradeType"><option>買進</option><option>賣出</option></select>
-        <input id="tradeQty" type="number" placeholder="股數" />
-        <input id="tradePrice" type="number" placeholder="成交價" />
-        <button id="tradeBtn">加入紀錄</button>
-      </div>
-      <ul id="tradeList" class="trade-list"></ul>
+    <section class="card ai-card">
+      <h2>🤖 朱老師 AI 今日觀點</h2>
+      <p>市場偏多震盪，ETF 與大型權值股可持續觀察。短線不追高，等待量能與趨勢確認。</p>
+      <ul>
+        <li>關注：0050、006208、2330</li>
+        <li>提醒：分批布局，控制單檔風險。</li>
+        <li>本內容僅供參考，不構成投資建議。</li>
+      </ul>
     </section>
   </main>
-  <script src="script.js"></script>
+
+  <footer>© 2026 AlphaTraerAI Pro｜V4.0 Alpha</footer>
+  <script src="js/app.js"></script>
 </body>
 </html>
