@@ -1,82 +1,39 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AlphaTraerAI Pro V4.0 Alpha</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AlphaTraderAI Pro V5.0｜AI 圍棋</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <div class="version">AlphaTraerAI Pro V4.0 Alpha</div>
-      <h1>朱老師 AI 投資中心</h1>
-      <p>Dashboard・即時行情・自選股・持股管理</p>
-    </div>
-    <button id="themeBtn">切換深色</button>
-  </header>
-
-  <main class="layout">
-    <section class="card market-card">
-      <h2>📈 今日大盤</h2>
-      <div class="market-grid">
-        <div>
-          <span>加權指數</span>
-          <strong>23,880.36</strong>
-          <em class="up">▲ 168.52（+0.71%）</em>
-        </div>
-        <div>
-          <span>櫃買指數</span>
-          <strong>245.18</strong>
-          <em class="up">▲ 1.42（+0.58%）</em>
-        </div>
-      </div>
-      <small>Alpha 版示範資料｜Beta 版將串接行情 API</small>
+  <main class="wrap">
+    <header class="top">
+      <div class="brand">AlphaTraderAI Pro V5.0</div>
+      <div class="sub">股票 AI × AI 圍棋平台</div>
+    </header>
+    <section class="hero">
+      <h1>汐止圍棋club AI Studio</h1>
+      <p>創立於 1985｜朱老師 AI 圍棋教室</p>
+      <strong>AI 對局 × 實戰解析 × 棋力提升</strong>
     </section>
-
-    <section class="card watch-card">
-      <h2>⭐ 我的自選股</h2>
-      <div id="watchlist" class="watchlist"></div>
-      <div class="add-row">
-        <input id="stockCode" placeholder="代號 例：2454" />
-        <input id="stockName" placeholder="名稱 例：聯發科" />
-        <button id="addStockBtn">新增</button>
-      </div>
+    <section class="match">
+      <div class="tag">AI 挑戰賽 #001</div>
+      <h2>AI（9D）讓四子 vs 小林（6D）</h2>
+      <p id="gameInfo">已內建示範 SGF，也可自行讀取 SGF。</p>
     </section>
-
-    <section class="card portfolio-card">
-      <h2>💼 持股管理</h2>
-      <div class="summary">
-        <div><span>總市值</span><strong id="totalValue">NT$ 0</strong></div>
-        <div><span>總損益</span><strong id="totalProfit">NT$ 0</strong></div>
-        <div><span>報酬率</span><strong id="totalReturn">0%</strong></div>
-      </div>
-      <div class="add-row portfolio-inputs">
-        <input id="holdCode" placeholder="股票代號" />
-        <input id="holdShares" type="number" placeholder="股數" />
-        <input id="holdCost" type="number" placeholder="成本價" />
-        <button id="addHoldingBtn">加入持股</button>
-      </div>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>股票</th><th>股數</th><th>成本</th><th>現價</th><th>損益</th></tr></thead>
-          <tbody id="holdingTable"></tbody>
-        </table>
-      </div>
+    <section class="controls">
+      <label class="btn">📂 讀取 SGF<input id="fileInput" type="file" accept=".sgf"></label>
+      <button id="sampleBtn">載入示範棋譜</button>
+      <button id="prevBtn">⏮ 上一步</button>
+      <button id="playBtn">▶ 播放</button>
+      <button id="nextBtn">⏭ 下一步</button>
+      <select id="speedSel"><option value="1400">0.5×</option><option value="800" selected>1×</option><option value="400">2×</option></select>
     </section>
-
-    <section class="card ai-card">
-      <h2>🤖 朱老師 AI 今日觀點</h2>
-      <p>市場偏多震盪，ETF 與大型權值股可持續觀察。短線不追高，等待量能與趨勢確認。</p>
-      <ul>
-        <li>關注：0050、006208、2330</li>
-        <li>提醒：分批布局，控制單檔風險。</li>
-        <li>本內容僅供參考，不構成投資建議。</li>
-      </ul>
-    </section>
+    <section class="status"><span id="moveText">第 0 手</span><span id="coordText">準備開始</span></section>
+    <section class="boardBox"><canvas id="board" width="900" height="900"></canvas></section>
+    <footer>汐止圍棋club｜朱老師 AI 圍棋教室｜0931-399-910<br>Build 001.2a：SGF 播放器第一版</footer>
   </main>
-
-  <footer>© 2026 AlphaTraerAI Pro｜V4.0 Alpha</footer>
-  <script src="js/app.js"></script>
+  <script src="sample_sgf.js"></script><script src="sgf.js"></script><script src="board.js"></script><script src="app.js"></script>
 </body>
 </html>
